@@ -60,17 +60,17 @@ echo -e "${BLUE}[INSTALLING]: VALGRIND !${NC}"
 sudo apt-get install valgrind -y
 # Generate SSH KEY for github
 echo -e "${BLUE}Generating SSH KEY AND SETTING UP GITHUB GLOBAL CONFIGURATION${NC}"
-ssh-keygen -t rsa -b 4096 -C ${GITHUB_MAIL} -f $HOME/.ssh/id_rsa
-cat $HOME/.ssh/id_rsa.pub
+#ssh-keygen -t rsa -b 4096 -C ${GITHUB_MAIL} -f $HOME/.ssh/id_rsa
+#cat $HOME/.ssh/id_rsa.pub
 git config --global user.email ${GITHUB_MAIL}
 git config --global user.name ${GITHUB_USERNAME}
-
+git config --global credential.helper store
 echo -e "${BLUE}COnfiguration Prompt${NC}"
 sed -i "s/#force_color_prompt=yes/force_color_prompt=yes/" ~/.bashrc
 echo "parse_git_branch() {
     git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
 }" >> ~/.bashrc
 echo "export PS1=\"\[\033[38;5;34m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;208m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]:\[$(tput sgr0)\]\[\033[38;5;69m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] > [\[$(tput sgr0)\]\[\033[38;5;196m\]\$?\[$(tput sgr0)\]\[\033[38;5;15m\]]\[\033[38;5;178m\]\$(parse_git_branch)\n\[$(tput sgr0)\]\[\033[38;5;7m\]——\[$(tput sgr0)\]\[\033[38;5;9m\]►\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\"" >> ~/.bashrc
-
-source .bashrc
+echo -e "${BLUE}execute bash${NC}"
+source ~/.bashrc
 
