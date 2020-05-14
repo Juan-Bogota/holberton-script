@@ -8,6 +8,14 @@ Clone this repository
 
 * Inside the folder holberton-script
 * Run the execute file configuration_hbtn.sh
+### Programs
+* Betty
+* Emacs 
+* Python3
+* Pep8
+* pip3
+* valgrind
+* prompt bash
 
 Restart the terminal....
 
