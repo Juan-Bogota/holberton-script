@@ -82,7 +82,7 @@ cd stderred
 
 sudo apt-get install build-essential cmake -y
 make
-echo "export LD_PRELOAD=\"$PWD/stderred/build/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}\"" >> ~/.bashrc
+echo "export LD_PRELOAD=\"$PWD/build/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}\"" >> ~/.bashrc
 cd
 echo -e "${GREEN} Install Node 10"
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
@@ -107,7 +107,6 @@ pip3 install SQLAlchemy==1.2.5
 
 curl -o 100-dump.sql "https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/290/100-hbnb.sql"
 cat 100-dump.sql | sudo mysql -uroot -proot
-rm 100-dump.sql
 sudo service mysql start
 
 echo -e "${GREEN} fabric python"

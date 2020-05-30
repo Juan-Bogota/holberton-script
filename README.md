@@ -17,6 +17,10 @@ Clone this repository
 * pip3
 * valgrind
 * prompt bash
+* MySQL
+* SQLAlchemy
+* Fabric
+* Stderred
+
 
 Restart the terminal....
-
