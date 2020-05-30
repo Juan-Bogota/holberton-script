@@ -5,6 +5,7 @@ RED='\033[0;31m'
 NC='\033[0m'
 GITHUB_MAIL='1213@holbertonschool.com'
 GITHUB_USERNAME='Juan Lopez'
+cd
 if [ "$(id -u)" != "0" ]; then
 echo -e "${RED}[ERROR]: Please, execute the script with sudo.${NC}"
 exit 1
@@ -73,4 +74,60 @@ echo "parse_git_branch() {
 echo "export PS1=\"\[\033[38;5;34m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;208m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]:\[$(tput sgr0)\]\[\033[38;5;69m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] > [\[$(tput sgr0)\]\[\033[38;5;196m\]\$?\[$(tput sgr0)\]\[\033[38;5;15m\]]\[\033[38;5;178m\]\$(parse_git_branch)\n\[$(tput sgr0)\]\[\033[38;5;7m\]——\[$(tput sgr0)\]\[\033[38;5;9m\]►\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\"" >> ~/.bashrc
 echo -e "${BLUE}execute bash${NC}"
 source ~/.bashrc
+cd
+echo -e "${BLUE}Stderred"
+git clone git://github.com/sickill/stderred.git
+cd stderred
 
+sudo apt-get install build-essential cmake -y
+make
+echo "export LD_PRELOAD=\"/home/$USER/stderred/build/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}\"" >> ~/.bashrc
+
+echo -e "${GREEN} Install Node 10"
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt-get install -y nodejs
+
+sudo npm install semistandard --global
+sudo npm install request --global
+export NODE_PATH=/usr/lib/node_modules
+
+echo -e "${GREEN} MySQL, MySQLdb and SQLAlchemy "
+echo 'deb http://repo.mysql.com/apt/ubuntu/ trusty mysql-5.7-dmr' | sudo tee -a /etc/apt/sources.list
+sudo apt-get update
+sudo apt-get install mysql-server-5.7 -y
+mysql --version
+
+sudo apt-get install python3-dev
+sudo apt-get install libmysqlclient-dev -y
+sudo apt-get install zlib1g-dev
+sudo pip3 install mysqlclient==1.3.10
+
+pip3 install SQLAlchemy==1.2.5
+
+curl -o 100-dump.sql "https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/290/100-hbnb.sql"
+cat 100-dump.sql | mysql -uroot -p
+rm 100-dump.sql
+
+echo -e "${GREEN} fabric python"
+
+pip3 uninstall Fabric
+sudo apt-get install libffi-dev
+sudo apt-get install libssl-dev
+sudo apt-get install build-essential
+sudo apt-get install python3.6-dev
+sudo apt-get install libpython3-dev
+pip3 install pyparsing
+pip3 install appdirs
+pip3 install setuptools==40.1.0
+pip3 install cryptography==2.8
+pip3 install Fabric3==1.14.post1
+
+echo -e "${GREEN} Flask python"
+
+pip3 install Flask
+pip3 install flask_cors
+
+sudo apt-get install -y python3-lxml
+sudo pip3 install flasgger
+
+echo -e "${GREEN} Restart the terminal"
