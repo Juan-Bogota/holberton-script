@@ -5,6 +5,7 @@ RED='\033[0;31m'
 NC='\033[0m'
 GITHUB_MAIL='1213@holbertonschool.com'
 GITHUB_USERNAME='Juan Lopez'
+
 cd
 if [ "$(id -u)" != "0" ]; then
 echo -e "${RED}[ERROR]: Please, execute the script with sudo.${NC}"
@@ -74,15 +75,15 @@ echo "parse_git_branch() {
 echo "export PS1=\"\[\033[38;5;34m\]\u\[$(tput sgr0)\]\[\033[38;5;15m\]@\[$(tput sgr0)\]\[\033[38;5;208m\]\h\[$(tput sgr0)\]\[\033[38;5;15m\]:\[$(tput sgr0)\]\[\033[38;5;69m\]\w\[$(tput sgr0)\]\[\033[38;5;15m\] > [\[$(tput sgr0)\]\[\033[38;5;196m\]\$?\[$(tput sgr0)\]\[\033[38;5;15m\]]\[\033[38;5;178m\]\$(parse_git_branch)\n\[$(tput sgr0)\]\[\033[38;5;7m\]——\[$(tput sgr0)\]\[\033[38;5;9m\]►\[$(tput sgr0)\]\[\033[38;5;15m\] \[$(tput sgr0)\]\"" >> ~/.bashrc
 echo -e "${BLUE}execute bash${NC}"
 source ~/.bashrc
-cd
+cd /
 echo -e "${BLUE}Stderred"
 git clone git://github.com/sickill/stderred.git
 cd stderred
 
 sudo apt-get install build-essential cmake -y
 make
-echo "export LD_PRELOAD=\"/home/$USER/stderred/build/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}\"" >> ~/.bashrc
-
+echo "export LD_PRELOAD=\"$PWD/stderred/build/libstderred.so${LD_PRELOAD:+:$LD_PRELOAD}\"" >> ~/.bashrc
+cd
 echo -e "${GREEN} Install Node 10"
 curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 sudo apt-get install -y nodejs
@@ -105,8 +106,9 @@ sudo pip3 install mysqlclient==1.3.10
 pip3 install SQLAlchemy==1.2.5
 
 curl -o 100-dump.sql "https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/290/100-hbnb.sql"
-cat 100-dump.sql | mysql -uroot -p
+cat 100-dump.sql | sudo mysql -uroot -proot
 rm 100-dump.sql
+sudo service mysql start
 
 echo -e "${GREEN} fabric python"
 
